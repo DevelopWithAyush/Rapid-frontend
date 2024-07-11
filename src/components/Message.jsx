@@ -1,12 +1,9 @@
 import React from "react";
-import SenderMessage from "./SenderMessage";
-import ReciverMesssage from "./ReciverMesssage";
 
 const Message = () => {
   return (
-    <div className="col-span-8 bg-[#272727] rounded-[12px] p-4 w-full  h-full">
-      <SenderMessage />
-      <ReciverMesssage />
+    <div className="flex flex-col items-center justify-center w-full h-full ">
+      <p className="text-center capitalize text-[20px] text-white font-medium" >🥺 no chat selected <br /> select chat to start convercation </p>
     </div>
   );
 };

@@ -7,7 +7,43 @@ body{
   color: white;
 }
 
-.hide-scrollbar::-webkit-scrollbar {
-  display: none;
-  /* For Chrome, Safari, and Opera */
+
+.scrollbar::-webkit-scrollbar {
+  width: 0.2rem;
+}
+
+.scrollbar::-webkit-scrollbar-track {
+  background: rgb(46, 46, 46);
+  border-radius: 1rem;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background:orangered;
+  border-radius: 1rem;
+}
+
+
+
+/* HTML: <div class="loader"></div> */
+.loader {
+  height: 20px;
+  aspect-ratio: 6;
+  display: flex;
+}
+.loader:before,
+.loader:after {
+  content: "";
+  flex: 1;
+  padding-left: calc(100%/6);
+  background: radial-gradient(closest-side at calc(100%/3) 50%,#FF4900 90%,#0000) 0/75% 100% content-box;
+  animation: l20 2s infinite;
+}
+.loader:after {
+  --_s:-1;
+}
+@keyframes l20 {
+    0%       {transform:scale(var(--_s,1)) translate(0)    rotate(0)}
+    25%      {transform:scale(var(--_s,1)) translate(-25%) rotate(0)}
+    50%      {transform:scale(var(--_s,1)) translate(-25%) rotate(1turn)}
+    75%,100% {transform:scale(var(--_s,1)) translate(0)    rotate(1turn)}
 }
