@@ -1,6 +1,6 @@
 import React, { memo, useContext } from "react";
 import { Link } from "react-router-dom";
-import { HandleContext } from "../hooks/HandleState";
+import { HandleContext } from "../../hooks/HandleState";
 const ChatCard = ({
   _id,
   name,
@@ -12,14 +12,13 @@ const ChatCard = ({
   index = 0,
 }) => {
 
-    const { handleDeleteChat } = useContext(HandleContext)
+  const { handleDeleteChat } = useContext(HandleContext)
   return (
-      <Link
-    //   onContextMenu={(e)=>handleDeleteChat(e,_id,groupChat)}
+    <Link
+      //   onContextMenu={(e)=>handleDeleteChat(e,_id,groupChat)}
       to={`/chat/${_id}`}
-      className={`w-full rounded-xl px-[1vw] py-[1vh] flex flex-row items-center justify-between ${
-        sameSender ? " bg-[#272727]  " : "  bg-[#272727] bg-opacity-[0.37] "
-      }     hover:bg-opacity-[0.7]  `}
+      className={`w-full rounded-xl px-[1vw] py-[1vh] flex flex-row items-center justify-between ${sameSender ? " bg-[#272727]  " : "  bg-[#272727] bg-opacity-[0.37] "
+        }     hover:bg-opacity-[0.7]  `}
     >
       <div className="flex  items-center gap-5">
         <div className="w-16 h-16 rounded-full  flex relative">
@@ -49,7 +48,7 @@ const ChatCard = ({
         </div>
       </div>
       <div className=" flex flex-col items-end gap-3">
-              <p>{newMessageAlert?.count}</p>
+        <p>{newMessageAlert?.count}</p>
         <p className="text-[#5A5A5A] text-[16px] font-normal">21:00</p>
       </div>
     </Link>

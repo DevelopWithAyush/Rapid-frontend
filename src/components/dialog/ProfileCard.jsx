@@ -1,7 +1,10 @@
 import React from "react";
 import Wrapped from "../features/Wrapped";
+import { useSelector } from "react-redux";
 
 const ProfileCard = () => {
+    const {user} = useSelector((state) => state.auth)
+    console.log(user)
   return (
       <>
           <Wrapped/>
@@ -16,14 +19,14 @@ const ProfileCard = () => {
                   <div className=" w-[150px] h-[150px] rounded-full overflow-hidden  ">
                       <img
                           className="w-full h-full"
-                          src="https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/355.jpg"
-                          alt=""
+                          src={user?.avatar?.url}
+                          alt={user?.avatar?.public_id}
                       />
                   </div>
                   <div className="flex flex-col items-center justify-start gap-2">
-                      <p className="text-[20px] font-medium text-[#757575]">Ayush Dubey</p>
+                      <p className="text-[20px] font-medium text-[#757575]">{ user.name}</p>
                       <p className="text-[20px] font-medium text-[#757575]">
-                          ayushdubey2017@gmail.com
+                          {user?.userEmail}
                       </p>
                   </div>
                   <div className="flex flex-col items-center text-[16px] mt-5  ">

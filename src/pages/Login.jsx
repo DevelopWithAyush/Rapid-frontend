@@ -1,70 +1,70 @@
+import axios from "axios";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { server } from "../constants/config";
+import { useDispatch } from "react-redux";
+import { userExists } from "../redux/reducers/auth";
 
-const Login = ({setUser}) => {
+const Login = () => {
   const [login, setLogin] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
+  const [avatar, setAvatar] = useState("");
+  console.log(avatar)
 
-  const navigate = useNavigate();
+
+  const dispatch = useDispatch();
 
   const loginSubmit = async (e) => {
     e.preventDefault();
+    const config = {
+      withCredentials: true,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
     try {
-      const res = await fetch(`http://localhost:5000/user/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
+      const { data } = await axios.post(
+        `${server}/api/v1/user/login`,
+        {
           userEmail: email,
           password: password,
-        }),
-      });
-
-      // Check if response is OK (status code 200-299)
-
-      const json = await res.json();
-      console.log(json);
-      if (json.success === true) {
-        toast.success(json.message);
-        setUser(true)
-        
-      } else if (json.success === false) {
-        // Handle other server-side errors
-        toast.error(json.message);
-      }
+        },
+        config
+      );
+      dispatch(userExists(true));
+      toast.success(data.message);
     } catch (error) {
-      toast.error(error.message || error);
+      console.log(error);
+      toast.error(error?.response?.data?.message || "Something wend wrong");
     }
   };
 
   const signupSubmit = async (e) => {
     e.preventDefault();
+    const formData = new FormData();
+    formData.append("avatar",avatar);
+    formData.append("name", name);
+    formData.append("userEmail", email);
+    formData.append("password", password);
+    const config = {
+      withCredentials: true,
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    };
     try {
-      const res = await fetch(`http://localhost:5000/user/register`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name,
-          userEmail: email,
-          password: password,
-        }),
-      });
-      const json = await res.json();
-      console.log(json);
-      if (json.success === true) {
-        toast.success(json.message);
-        navigate("/");
-      } else if (json.success === false) {
-        toast.error(json.message);
-      }
+      const { data } = await axios.post(
+        `${server}/api/v1/user/register`,
+        formData,
+        config
+      );
+      dispatch(userExists(true));
+      toast.success(data.message);
     } catch (error) {
-      toast.error(error.message);
+      toast.error(error?.response?.data?.message || "Something wend wrong");
     }
   };
 
@@ -113,12 +113,13 @@ const Login = ({setUser}) => {
           <>
             <p className="text-[24px] font-semibold">SignUp</p>
             <form className=" flex flex-col items-center gap-6 w-full">
-              {/* <input
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your Name"
-                type="file"
-                className="bg-transparent outline-none border border-white rounded-[12px] w-full text-[16px] py-3 px-6  placeholder-green-100"
-              /> */}
+                <input
+                  type="file"
+                  name="avatar"
+                  onChange={(e) => setAvatar(e.target.files[0])}
+                  required
+                  className="bg-transparent outline-none border border-white rounded-[12px] w-full text-[16px] py-3 px-6 placeholder-green-100"
+                />
               <input
                 value={name}
                 onChange={(e) => setName(e.target.value)}

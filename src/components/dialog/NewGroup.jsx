@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import Wrapped from "../features/Wrapped";
-import { IoMdSearch } from "react-icons/io";
-import SearchFriends from "../SearchFriends";
-import GroupCard from "../GroupCard";
+import GroupCard from "../shared/GroupCard";
+import { HandleContext } from "../../hooks/HandleState";
 
 const NewGroup = () => {
+  const {setIsNewGroup,setWrapped} = useContext(HandleContext)
   return (
     <>
       <Wrapped />
@@ -29,11 +29,14 @@ const NewGroup = () => {
           <GroupCard />
         </div>
         <div className="flex flex-row items-center justify-evenly w-full">
-          <button className="capitalize py-2 px-5 bg-red-500 rounded-lg">
+          <button onClick={() => {
+            setWrapped(false)
+            setIsNewGroup(false)
+          }} className="capitalize py-2 px-5 bg-red-500 rounded-lg">
             cancel
           </button>
-          <button className="capitalize py-2 px-5 bg-green-500 rounded-lg">
-            created
+          <button  className="capitalize py-2 px-5 bg-green-500 rounded-lg">
+            create
           </button>
         </div>
       </div>

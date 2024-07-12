@@ -4,15 +4,31 @@ import { IoChatbubbleEllipses } from "react-icons/io5";
 import { MdGroup, MdGroupAdd, MdOutlineLogout } from "react-icons/md";
 
 import { Link } from "react-router-dom";
-import { HandleContext } from "../hooks/HandleState";
+import { HandleContext } from "../../hooks/HandleState";
+import axios from "axios";
+import { server } from "../../constants/config";
+import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import { userNotExists } from "../../redux/reducers/auth";
 
-const Search = lazy(() => import("./dialog/Search"));
-const NewGroup = lazy(() => import("./dialog/NewGroup"));
+const NewGroup = lazy(() => import("../dialog/NewGroup"));
 
 const SideBar = () => {
   const { isSearch, setIsNewGroup, setIsSearch, isNewGroup, setWrapped } =
     useContext(HandleContext);
-  return (
+const dispatch = useDispatch()
+  const handleLogout = async(e) => {
+    e.preventDefault()
+    try {
+      const { data } = await axios.get(`${server}/api/v1/user/logout`, { withCredentials: true })
+      console.log(data.message)
+      toast.success(data.message)
+      dispatch(userNotExists())
+    } catch (error) {
+      toast.error(error?.response?.data?.message || "something went worng")
+    }
+  }
+      return (
     <>
       <aside className="col-span-1 bg-[#FF4900] w-full min-h-screen rounded-tr-[48px] flex flex-col items-center pt-[10vh] gap-16 ">
         <IoChatbubbleEllipses
@@ -36,7 +52,7 @@ const SideBar = () => {
           {" "}
           <MdGroup className=" cursor-pointer text-[28px]" />
         </Link>
-        <MdOutlineLogout className=" cursor-pointer text-[28px]" />
+            <MdOutlineLogout onClick={handleLogout}  className=" cursor-pointer text-[28px]" />
       </aside>
       {/* {isSearch && <Suspense fallback={<div>loading....</div>}><Search /></Suspense>} */}
       {isNewGroup && (

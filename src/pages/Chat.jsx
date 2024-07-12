@@ -1,41 +1,37 @@
 import React from "react";
 import AppLayout from "../components/layout/AppLayout";
-import { Link } from "react-router-dom";
-import { FaArrowRight, FaXmark } from "react-icons/fa6";
-import { IoMdSearch } from "react-icons/io";
-import { MdAttachFile } from "react-icons/md";
-import { IoSend } from "react-icons/io5";
+import ChatHeader from "../components/shared/ChatHeader";
+import MessageSender from "../components/shared/MessageSender";
+import { sampleMessage } from "../data/message";
+import MessageComponents from "../components/shared/MessageComponents";
 
 const Chat = () => {
+  const user = {
+    _id: "665d06798ae8f9b4815979f1" ,
+    name: 'ayush dubey',
+    avatar: {
+      "public_id": "some_public_id",
+      "url": "http://example.com/avatar.jpg"
+    }
+  }
   return (
     <AppLayout>
-      <div className="h-[8%] flex flex-row items-center justify-between bg-[#FF4900] rounded-t-lg py-3 px-6">
-        <div className="flex flex-row items-center gap-5 justify-start">
-          <div className="w-[50px] h-[50px] rounded-full bg-white"></div>
-          <p className="text-[16px] font-medium ">ayushdubey2017</p>
-        </div>
-        <Link to={"/"} className="text-[24px]">
-          {" "}
-          <FaXmark />{" "}
-        </Link>
+      <ChatHeader/>
+      <div className="h-[86%] flex flex-col items-start justify-start gap-5 p-4 overflow-auto scrollbar  ">
+        {sampleMessage.map((i) => {
+          return (
+           <MessageComponents message={i} user={user}/>
+         ) 
+           
+        })}
+        {sampleMessage.map((i) => {
+          return (
+           <MessageComponents message={i} user={user}/>
+         ) 
+           
+        })}
       </div>
-      <div className="h-[84%] flex"></div>
-      <div className="h-[8%] flex flex-row items-center justify-between rounded-b-lg w-full px-6 ">
-        <div className=" m-3 flex flex-col items-center justify-center rounded-full">
-          <MdAttachFile className="text-[30px]" />
-        </div>
-        <form className=" w-full flex flex-row px-6 h-full justify-between bg-[#424242] rounded-full ">
-          <input
-            type="text"
-            placeholder="Type new message ...."
-            className=" w-full border-none outline-none bg-transparent"
-          />
-          <button className="h-full   " >
-            {" "}
-            <FaArrowRight className="text-[30px] text-[#FF4900] hover:translate-x-[5px] duration-100 "  />
-          </button>
-        </form>
-      </div>
+      <MessageSender/>
     </AppLayout>
   );
 };

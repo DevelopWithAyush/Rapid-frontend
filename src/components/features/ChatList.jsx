@@ -1,9 +1,8 @@
 import React from "react";
-import { chatData } from "../../data/chat";
-import ChatCard from "../ChatCard";
+import ChatCard from "../shared/ChatCard";
+import { useMyChatsQuery } from "../../redux/api/api";
 
 const ChatList = ({
-    
     userId,
     onlineUsers = ["665e3969628fb659db41a872",
         "665e3969628fb659db41a878",
@@ -17,11 +16,12 @@ const ChatList = ({
   ],
 }) => {
   
-
+  const { isLoading, data, isError, error, refetch } = useMyChatsQuery("")
+  console.log(data?.chats)
 
   return (
     <>
-      {chatData.map((chat) => {
+      {data?.chats.map((chat) => {
 
         const MessageAlert = newMessageAlert.find(
           ({ chatId }) => chatId === chat._id

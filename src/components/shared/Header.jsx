@@ -1,14 +1,16 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { IoMdNotifications } from "react-icons/io";
-import Avatar from "../assets/IMG_20240424_164451046.jpg";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import ProfileCard from "./dialog/ProfileCard";
-import { HandleContext } from "../hooks/HandleState";
-import { FaXmark } from "react-icons/fa6";
-import Notification from "./dialog/Notification";
+import { HandleContext } from "../../hooks/HandleState";
+import Notification from "../dialog/Notification";
+import ProfileCard from "../dialog/ProfileCard";
 const Header = () => {
   const { profile, setProfile, setWrapped, isNoti, setIsNoti } =
     useContext(HandleContext);
+  
+  const { user } = useSelector((state) => state.auth);
+  // const { api } = useSelector((state) => state) 
 
   return (
     <>
@@ -28,7 +30,7 @@ const Header = () => {
                 setIsNoti(!isNoti);
               }}
             />
-            <Notification/>
+            <Notification />
           </div>
           <div
             onClick={() => {
@@ -37,7 +39,7 @@ const Header = () => {
             }}
             className="w-12 h-12 rounded-full overflow-hidden flex"
           >
-            <img src={Avatar} alt="" />
+            <img src={user?.avatar?.url} alt={user?.avatar?.public_id} />
           </div>
         </div>
       </header>
