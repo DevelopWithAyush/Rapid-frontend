@@ -24,12 +24,7 @@ const Chat = () => {
          ) 
            
         })}
-        {sampleMessage.map((i) => {
-          return (
-           <MessageComponents message={i} user={user}/>
-         ) 
-           
-        })}
+      
       </div>
       <MessageSender/>
     </AppLayout>

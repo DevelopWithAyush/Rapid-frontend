@@ -1,23 +1,57 @@
-import {createApi,fetchBaseQuery} from '@reduxjs/toolkit/query/react'
-import { server } from '../../constants/config'
-
-
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { server } from "../../constants/config";
 
 const api = createApi({
-    reducerPath: "api",
-    baseQuery: fetchBaseQuery({ baseUrl: `${server}/api/v1/` }),
-    tagTypes:["Chat"], //yeh catching kerta hai matlab data temporary store rahega 
-    endpoints: (builder) => ({
-        myChats: builder.query({
-            query: () => ({
-                url: "chat/my",
-                credentials:'include'
-            }),
-            providesTags:["Chat"],
-        }),
+  reducerPath: "api",
+  baseQuery: fetchBaseQuery({ baseUrl: `${server}/api/v1/` }),
+  tagTypes: ["Chat", "User"], //yeh catching kerta hai matlab data temporary store rahega
+  endpoints: (builder) => ({
+    myChats: builder.query({
+      query: () => ({
+        url: "chat/my",
+        credentials: "include",
+      }),
+      providesTags: ["Chat"],
     }),
-})
+    searchUser: builder.query({
+      query: (name) => ({
+        url: `user/search?name=${name}`,
+        credentials: "include",
+      }),
+      providesTags: ["User"],
+    }),
+    sendFriendRequest: builder.mutation({
+      query: (data) => ({
+        url: `user/send-request`,
+        method: "POST",
+        credentials: "include",
+        body: data,
+      }),
+      invalidatesTags: ["User"],
+    }),
+    getNotifications: builder.query({
+      query: () => ({
+        url: `user/notification`,
+        credentials: "include",
+      }),
+      keepUnusedDataFor: 0,
+    }),
+      acceptFriendRequest: builder.mutation({
+          query: (data) => ({
+              url: `user/accept-request`,
+              method: 'PUT',
+              credentials: "include",
+              body:data,
+        })
+    })
+  }),
+});
 
-
-export default api
-export const {useMyChatsQuery} = api
+export default api;
+export const {
+  useMyChatsQuery,
+  useLazySearchUserQuery,
+  useSendFriendRequestMutation,
+    useGetNotificationsQuery,
+  useAcceptFriendRequestMutation
+} = api;

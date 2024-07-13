@@ -1,6 +1,7 @@
 import React from "react";
 import Wrapped from "../features/Wrapped";
 import { useSelector } from "react-redux";
+import moment from 'moment'
 
 const ProfileCard = () => {
     const {user} = useSelector((state) => state.auth)
@@ -30,7 +31,7 @@ const ProfileCard = () => {
                       </p>
                   </div>
                   <div className="flex flex-col items-center text-[16px] mt-5  ">
-                      <p className="text-[16px] font-semibold leading-[20px]"> Joined 13min ago</p>
+                      <p className="text-[16px] font-semibold leading-[20px] capitalize">joined : {moment(user?.createdAt).fromNow()}</p>
                   </div>
               </div>
           </div>

@@ -2,9 +2,14 @@ import React, { useContext } from 'react'
 import { FaXmark } from 'react-icons/fa6'
 import NotificationCard from '../shared/NotificationCard'
 import { HandleContext } from '../../hooks/HandleState'
+import { useGetNotificationsQuery } from '../../redux/api/api'
+import { useErrors } from '../../hooks/hooks'
 
 const Notification = () => {
     const {setIsNoti,isNoti} = useContext(HandleContext)
+
+    const {isLoading ,data,error,isError} = useGetNotificationsQuery()
+    useErrors([{ isError, error }]);
   return (
       <div
           className={`absolute bottom-0 left-0 translate-y-[100%] -translate-x-[100%] origin-top-right transition-all duration-300 ${isNoti ? " scale-100" : "scale-0"
@@ -17,7 +22,11 @@ const Notification = () => {
               </button>
           </div>
           <div className='flex flex-col items-center justify-start gap-5 w-full'>
-            <NotificationCard/>
+              {data?.allRequests.map((noti) => {
+                  return (
+                      <NotificationCard key={noti._id} noti={noti} />
+                  )
+              })}
           </div>
       </div>
   )

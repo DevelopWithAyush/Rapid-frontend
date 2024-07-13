@@ -1,18 +1,23 @@
-import React, { useContext } from "react";
-import ChatList from "../features/ChatList";
+import React, { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { HandleContext } from "../../hooks/HandleState";
-import Header from "../shared/Header";
-import SearchFriends from "../shared/SearchFriends";
-import SideBar from "../shared/SideBar";
+import { useErrors } from "../../hooks/hooks";
 import { useMyChatsQuery } from "../../redux/api/api";
-import { useSelector } from "react-redux";
+import Search from "../dialog/Search";
+import ChatList from "../features/ChatList";
+import Header from "../shared/Header";
+import SideBar from "../shared/SideBar";
 
 const AppLayout = ({ children }) => {
   const { userId } = useParams();
   const { isSearch } = useContext(HandleContext);
+  const { isLoading, data, isError, error, refetch } = useMyChatsQuery();
+  useErrors([{ isError, error }]);
 
+useEffect(() => {
+refetch()  
 
+}, [])
 
 
 
@@ -23,10 +28,11 @@ const AppLayout = ({ children }) => {
         <Header />
         <div className="grid grid-cols-11 gap-[20px] w-full h-[90%] relative">
           <div className="col-span-3 relative h-full flex flex-col gap-6 items-start justify-start overflow-hidden">
-            <SearchFriends />
-            <div className="w-full h-full flex-grow flex flex-col gap-5 items-start justify-start overflow-auto pr-3 scrollbar relative">
-              {!isSearch &&  <ChatList   userId={userId} />}
-            </div>
+            {isSearch ? <Search /> : <div className="w-full h-full flex-grow flex flex-col gap-5 items-start justify-start overflow-auto pr-3 scrollbar relative">
+              <ChatList data={data} userId={userId} />
+            </div>}
+            
+            
           </div>
           <div className="col-span-8 bg-[#272727] rounded-[12px]  w-full h-full relative overflow-hidden pb-3">
             {children}
