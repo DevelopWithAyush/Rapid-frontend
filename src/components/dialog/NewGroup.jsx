@@ -2,9 +2,11 @@ import React, { useContext } from "react";
 import Wrapped from "../features/Wrapped";
 import GroupCard from "../shared/GroupCard";
 import { HandleContext } from "../../hooks/HandleState";
+import { useToGetYourFriendsQuery } from "../../redux/api/api";
 
 const NewGroup = () => {
   const {setIsNewGroup,setWrapped} = useContext(HandleContext)
+  const { data, isLoading,isError,error,refetch } = useToGetYourFriendsQuery()
   return (
     <>
       <Wrapped />
@@ -20,13 +22,9 @@ const NewGroup = () => {
         </form>
         <p className="w-full text-left text-[20px] font-semibold">Friends</p>
         <div className=" w-full h-full overflow-auto  flex flex-col items-start justify-start pr-3 gap-5 scrollbar ">
-          <GroupCard />
-          <GroupCard />
-          <GroupCard />
-          <GroupCard />
-          <GroupCard />
-          <GroupCard />
-          <GroupCard />
+          {data?.friends.map((friend) => {
+            return <GroupCard friend={friend}  key={friend._id}/>
+        })}
         </div>
         <div className="flex flex-row items-center justify-evenly w-full">
           <button onClick={() => {

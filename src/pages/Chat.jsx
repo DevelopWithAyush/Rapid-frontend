@@ -1,32 +1,78 @@
-import React from "react";
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import Loader from "../components/features/Loader";
 import AppLayout from "../components/layout/AppLayout";
 import ChatHeader from "../components/shared/ChatHeader";
-import MessageSender from "../components/shared/MessageSender";
-import { sampleMessage } from "../data/message";
 import MessageComponents from "../components/shared/MessageComponents";
+import MessageSender from "../components/shared/MessageSender";
+import { NEW_MESSAGE } from "../constants/events";
+import { useErrors, useSocketEvents } from "../hooks/hooks";
+import { SocketContext } from "../hooks/socket";
+import {
+  useGetMessagesFromIdQuery,
+  useToGetChatDetailQuery,
+} from "../redux/api/api";
 
 const Chat = () => {
-  const user = {
-    _id: "665d06798ae8f9b4815979f1" ,
-    name: 'ayush dubey',
-    avatar: {
-      "public_id": "some_public_id",
-      "url": "http://example.com/avatar.jpg"
-    }
-  }
-  return (
+  const containerRef = useRef(null);
+  const { user } = useSelector((state) => state.auth);
+  const { chatId } = useParams();
+  const chatDetails = useToGetChatDetailQuery({ chatId, skip: !chatId });
+  const { socket } = useContext(SocketContext);
+  const [messages, setMessages] = useState([]);
+  const [page, setPage] = useState(1);
+
+  const newMessageHandler = useCallback((data) => {
+    setMessages((prev) => [...prev, data.message]);
+  }, []);
+
+  const oldMessage = useGetMessagesFromIdQuery({ chatId, page });
+
+  
+
+  useEffect(() => {
+    setMessages([]);
+    oldMessage.refetch();
+  }, [chatId]);
+
+  const errors = [
+    { isError: chatDetails.isError, error: chatDetails.error },
+    { isError: oldMessage.isError, error: oldMessage.error },
+  ];
+
+  useErrors(errors);
+
+  const eventHandler = { [NEW_MESSAGE]: newMessageHandler };
+  useSocketEvents(socket, eventHandler);
+
+  return chatDetails.isLoading ? (
+    <Loader />
+  ) : (
     <AppLayout>
-      <ChatHeader/>
-      <div className="h-[86%] flex flex-col items-start justify-start gap-5 p-4 overflow-auto scrollbar  ">
-        {sampleMessage.map((i) => {
-          return (
-           <MessageComponents message={i} user={user}/>
-         ) 
-           
+      <ChatHeader chatId={chatId} />
+      <div
+        ref={containerRef}
+        className="h-[86%] flex flex-col items-start justify-start gap-5 p-4 overflow-auto scrollbar  "
+      >
+        {!oldMessage.isLoading &&
+          oldMessage?.data?.messages.map((i) => {
+            return <MessageComponents key={i._id} message={i} user={user} />;
+          })}
+        {messages.map((i) => {
+          return <MessageComponents key={i._id} message={i} user={user} />;
         })}
-      
       </div>
-      <MessageSender/>
+      <MessageSender
+        chatId={chatId}
+        members={chatDetails?.data?.chat?.members}
+      />
     </AppLayout>
   );
 };

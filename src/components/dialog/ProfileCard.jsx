@@ -5,7 +5,6 @@ import moment from 'moment'
 
 const ProfileCard = () => {
     const {user} = useSelector((state) => state.auth)
-    console.log(user)
   return (
       <>
           <Wrapped/>
@@ -25,7 +24,7 @@ const ProfileCard = () => {
                       />
                   </div>
                   <div className="flex flex-col items-center justify-start gap-2">
-                      <p className="text-[20px] font-medium text-[#757575]">{ user.name}</p>
+                      <p className="text-[20px] font-medium text-[#757575]">{ user?.name}</p>
                       <p className="text-[20px] font-medium text-[#757575]">
                           {user?.userEmail}
                       </p>

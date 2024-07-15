@@ -14,14 +14,13 @@ import { userNotExists } from "../../redux/reducers/auth";
 const NewGroup = lazy(() => import("../dialog/NewGroup"));
 
 const SideBar = () => {
-  const { isSearch, setIsNewGroup, setIsSearch, isNewGroup, setWrapped } =
+  const { setIsNewGroup, setIsSearch, isNewGroup, setWrapped } =
     useContext(HandleContext);
 const dispatch = useDispatch()
   const handleLogout = async(e) => {
     e.preventDefault()
     try {
       const { data } = await axios.get(`${server}/api/v1/user/logout`, { withCredentials: true })
-      console.log(data.message)
       toast.success(data.message)
       dispatch(userNotExists())
     } catch (error) {

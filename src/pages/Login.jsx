@@ -1,9 +1,8 @@
 import axios from "axios";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
-import { server } from "../constants/config";
 import { useDispatch } from "react-redux";
+import { server } from "../constants/config";
 import { userExists } from "../redux/reducers/auth";
 
 const Login = () => {
@@ -12,7 +11,6 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [avatar, setAvatar] = useState("");
-  console.log(avatar)
 
 
   const dispatch = useDispatch();
@@ -37,13 +35,13 @@ const Login = () => {
       dispatch(userExists(true));
       toast.success(data.message);
     } catch (error) {
-      console.log(error);
       toast.error(error?.response?.data?.message || "Something wend wrong");
     }
   };
 
   const signupSubmit = async (e) => {
     e.preventDefault();
+    const toastId = toast.loading("Register new id...")
     const formData = new FormData();
     formData.append("avatar",avatar);
     formData.append("name", name);
@@ -62,9 +60,9 @@ const Login = () => {
         config
       );
       dispatch(userExists(true));
-      toast.success(data.message);
+      toast.success(data.message,{id:toastId});
     } catch (error) {
-      toast.error(error?.response?.data?.message || "Something wend wrong");
+      toast.error(error?.response?.data?.message || "Something wend wrong", {id:toastId});
     }
   };
 

@@ -4,7 +4,7 @@ import { useLazySearchUserQuery } from "../../redux/api/api";
 import toast from "react-hot-toast";
 
 const SearchFriends = ({setUsers}) => {
-  const [search, setSearch] = useState(null);
+  const [search, setSearch] = useState("");
   const [searchUser] = useLazySearchUserQuery();
   useEffect(() => {
     const timeOutId = setTimeout(() => {

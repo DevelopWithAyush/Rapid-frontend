@@ -11,7 +11,6 @@ const HandleState = ({ children }) => {
   const [attachment, setAttachment] = useState(false);
   const handleDeleteChat = (e, _id, groupChat) => {
     e.preventDefault();
-    console.log("Delete chat", _id, groupChat);
   };
 
   return (

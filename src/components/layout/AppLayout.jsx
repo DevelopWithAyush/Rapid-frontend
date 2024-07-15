@@ -9,7 +9,7 @@ import Header from "../shared/Header";
 import SideBar from "../shared/SideBar";
 
 const AppLayout = ({ children }) => {
-  const { userId } = useParams();
+  const { chatId } = useParams();
   const { isSearch } = useContext(HandleContext);
   const { isLoading, data, isError, error, refetch } = useMyChatsQuery();
   useErrors([{ isError, error }]);
@@ -21,6 +21,10 @@ refetch()
 
 
 
+
+
+
+
   return (
     <section className="w-[100vw] h-[100vh] fixed top-0 left-0 overflow-hidden grid grid-cols-12 gap-[30px]">
       <SideBar />
@@ -29,7 +33,7 @@ refetch()
         <div className="grid grid-cols-11 gap-[20px] w-full h-[90%] relative">
           <div className="col-span-3 relative h-full flex flex-col gap-6 items-start justify-start overflow-hidden">
             {isSearch ? <Search /> : <div className="w-full h-full flex-grow flex flex-col gap-5 items-start justify-start overflow-auto pr-3 scrollbar relative">
-              <ChatList data={data} userId={userId} />
+              <ChatList data={data} chatId={chatId} />
             </div>}
             
             

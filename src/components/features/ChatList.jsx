@@ -1,11 +1,9 @@
 import React from "react";
 import ChatCard from "../shared/ChatCard";
-import { useMyChatsQuery } from "../../redux/api/api";
-import { useErrors } from "../../hooks/hooks";
 
 const ChatList = ({
   data,
-  userId,
+  chatId,
   onlineUsers = [
     "665e3969628fb659db41a872",
     "665e3969628fb659db41a878",
@@ -44,7 +42,7 @@ const ChatList = ({
               name={chat.name}
               groupChat={chat.groupChat}
               avatar={chat.avatar}
-              sameSender={chat._id === userId}
+              sameSender={chat._id === chatId}
               newMessageAlert={MessageAlert}
               isOnline={isOnline}
             />

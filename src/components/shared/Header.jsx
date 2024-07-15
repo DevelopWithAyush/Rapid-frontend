@@ -28,6 +28,7 @@ const Header = () => {
               className="text-[24px]"
               onClick={() => {
                 setIsNoti(!isNoti);
+                setWrapped(true);
               }}
             />
             <Notification />

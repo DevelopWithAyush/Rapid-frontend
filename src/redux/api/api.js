@@ -4,7 +4,7 @@ import { server } from "../../constants/config";
 const api = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({ baseUrl: `${server}/api/v1/` }),
-  tagTypes: ["Chat", "User"], //yeh catching kerta hai matlab data temporary store rahega
+  tagTypes: ["Chat", "User", "friends","Message"], //yeh catching kerta hai matlab data temporary store rahega
   endpoints: (builder) => ({
     myChats: builder.query({
       query: () => ({
@@ -36,13 +36,39 @@ const api = createApi({
       }),
       keepUnusedDataFor: 0,
     }),
-      acceptFriendRequest: builder.mutation({
-          query: (data) => ({
-              url: `user/accept-request`,
-              method: 'PUT',
-              credentials: "include",
-              body:data,
-        })
+    acceptFriendRequest: builder.mutation({
+      query: (data) => ({
+        url: `user/accept-request`,
+        method: "PUT",
+        credentials: "include",
+        body: data,
+      }),
+      invalidatesTags: ["Chat"],
+    }),
+    toGetYourFriends: builder.query({
+      query: () => ({
+        url: `user/friends`,
+        credentials: "include",
+      }),
+      providesTags: ["friends"],
+    }),
+    toGetChatDetail: builder.query({
+      query: ({ chatId, populate = false }) => {
+        let url = `chat/${chatId}`;
+        if (populate) url += "?populate=true";
+        return {
+          url: url,
+          credentials: "include",
+        };
+      },
+      providesTags: ["Chat"],
+    }),
+    getMessagesFromId: builder.query({
+      query: ({ chatId, page }) => ({
+        url: `chat/message/${chatId}?page=${page}`,
+        credentials:"include"
+      }),
+      providesTags:["Message"]
     })
   }),
 });
@@ -52,6 +78,9 @@ export const {
   useMyChatsQuery,
   useLazySearchUserQuery,
   useSendFriendRequestMutation,
-    useGetNotificationsQuery,
-  useAcceptFriendRequestMutation
+  useGetNotificationsQuery,
+  useAcceptFriendRequestMutation,
+  useToGetYourFriendsQuery,
+  useToGetChatDetailQuery,
+  useGetMessagesFromIdQuery
 } = api;

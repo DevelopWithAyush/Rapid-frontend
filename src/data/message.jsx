@@ -3,7 +3,7 @@ export const sampleMessage = [
             _id: "6669eab2e9f98891657b890c",
             content: "Agnosco suspendo valetudo adipiscor.",
             sender: {
-                _id: "665d06798ae8f9b4815979f1",
+                _id: "66930344c4b1ce3abd458ba8",
                 name: "John Doe",
                 avatar: {
                     public_id: "some_public_id",
@@ -20,7 +20,7 @@ export const sampleMessage = [
             _id: "6669eab2e9f98891657b890b",
             content: "Vinitor magni asperiores texo.",
             sender: {
-                _id: "665e3969628fb659db41a87a",
+                _id: "66930344c4b1ce3abd458ba8",
                 name: "Angela Stiedemann",
                 avatar: {
                     public_id: "airmail_knavishly_eek.list",
