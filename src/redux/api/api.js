@@ -4,7 +4,7 @@ import { server } from "../../constants/config";
 const api = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({ baseUrl: `${server}/api/v1/` }),
-  tagTypes: ["Chat", "User", "friends","Message"], //yeh catching kerta hai matlab data temporary store rahega
+  tagTypes: ["Chat", "User", "friends", "Message"], //yeh catching kerta hai matlab data temporary store rahega
   endpoints: (builder) => ({
     myChats: builder.query({
       query: () => ({
@@ -66,10 +66,18 @@ const api = createApi({
     getMessagesFromId: builder.query({
       query: ({ chatId, page }) => ({
         url: `chat/message/${chatId}?page=${page}`,
-        credentials:"include"
+        credentials: "include",
       }),
-      providesTags:["Message"]
-    })
+      keepUnusedDataFor:0
+    }),
+    sendAttachments: builder.mutation({
+      query: (data) => ({
+        url: `chat/message`,
+        method: "POST",
+        credentials: "include",
+        body: data,
+      }),
+    }),
   }),
 });
 
@@ -82,5 +90,6 @@ export const {
   useAcceptFriendRequestMutation,
   useToGetYourFriendsQuery,
   useToGetChatDetailQuery,
-  useGetMessagesFromIdQuery
+  useGetMessagesFromIdQuery,
+  useSendAttachmentsMutation
 } = api;

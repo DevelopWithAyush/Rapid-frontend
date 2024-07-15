@@ -1,8 +1,12 @@
-import React, { useContext, useEffect } from "react";
+import React, { useCallback, useContext, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
+import { NEW_MESSAGE_ALERT } from "../../constants/events";
 import { HandleContext } from "../../hooks/HandleState";
-import { useErrors } from "../../hooks/hooks";
+import { useErrors, useSocketEvents } from "../../hooks/hooks";
+import { SocketContext } from "../../hooks/socket";
 import { useMyChatsQuery } from "../../redux/api/api";
+import { setNewMessageAlert } from "../../redux/reducers/chat";
 import Search from "../dialog/Search";
 import ChatList from "../features/ChatList";
 import Header from "../shared/Header";
@@ -19,11 +23,32 @@ refetch()
 
 }, [])
 
+  const dispatch = useDispatch()
+
+  const {socket} = useContext(SocketContext)
+
+//   const newMessageAlertHandler = useCallback((data)=>{
+//     dispatch(setNewMessageAlert(data))
+//     console.log("ayush")
+//   },[dispatch])
 
 
+//   const eventHandlers = {
+//     [NEW_MESSAGE_ALERT]: newMessageAlertHandler,
+// }
+
+// useSocketEvents(socket,eventHandlers)
 
 
-
+  useEffect(() => {
+    socket.on(NEW_MESSAGE_ALERT, (data) => {
+    console.log(data)
+    dispatch(setNewMessageAlert(data))
+  })
+    return () => {
+    socket.off(NEW_MESSAGE_ALERT)
+  }
+},[dispatch])
 
   return (
     <section className="w-[100vw] h-[100vh] fixed top-0 left-0 overflow-hidden grid grid-cols-12 gap-[30px]">

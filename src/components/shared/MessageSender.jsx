@@ -17,7 +17,7 @@ const MessageSender = ({ chatId, members }) => {
   };
   return (
     <div className="h-[6%] flex flex-row items-center justify-between rounded-b-lg w-full px-6 ">
-      <FileAttachment />
+      <FileAttachment chatId={chatId} />
       <form
         onSubmit={sendMessageHandler}
         className=" w-full flex flex-row px-6 h-full justify-between bg-[#424242] rounded-full "

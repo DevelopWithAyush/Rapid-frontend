@@ -1,16 +1,19 @@
 import React, { useContext } from "react";
 import { IoMdNotifications } from "react-icons/io";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { HandleContext } from "../../hooks/HandleState";
 import Notification from "../dialog/Notification";
 import ProfileCard from "../dialog/ProfileCard";
+import { incrementNotification, resetNotificationCount } from "../../redux/reducers/chat";
 const Header = () => {
   const { profile, setProfile, setWrapped, isNoti, setIsNoti } =
     useContext(HandleContext);
-  
+
   const { user } = useSelector((state) => state.auth);
-  // const { api } = useSelector((state) => state) 
+  const { notificationCount } = useSelector((state) => state.chat);
+  const dispatch = useDispatch()
+  // const { api } = useSelector((state) => state)
 
   return (
     <>
@@ -27,10 +30,16 @@ const Header = () => {
             <IoMdNotifications
               className="text-[24px]"
               onClick={() => {
+                dispatch(resetNotificationCount())
                 setIsNoti(!isNoti);
                 setWrapped(true);
               }}
             />
+            {notificationCount !== 0 && (
+              <div className="absolute top-0 right-0 translate-x-1/2 -translate-y-1/2 w-6 rounded-full text-[12px] p-[2px] aspect-square flex flex-col items-center justify-center  bg-red-500  ">
+                {notificationCount >99 ? "99+ ":notificationCount}
+              </div>
+            )}
             <Notification />
           </div>
           <div

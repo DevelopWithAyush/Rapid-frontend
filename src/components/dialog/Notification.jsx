@@ -1,16 +1,33 @@
-import React, { useContext } from 'react'
+import React, { useCallback, useContext } from 'react'
 import { FaXmark } from 'react-icons/fa6'
 import NotificationCard from '../shared/NotificationCard'
 import { HandleContext } from '../../hooks/HandleState'
 import { useGetNotificationsQuery } from '../../redux/api/api'
-import { useErrors } from '../../hooks/hooks'
+import { useErrors, useSocketEvents } from '../../hooks/hooks'
 import Wrapped from '../features/Wrapped'
+import { useDispatch } from 'react-redux'
+import { incrementNotification } from '../../redux/reducers/chat'
+import { NEW_REQUEST } from '../../constants/events'
+import { SocketContext } from '../../hooks/socket'
 
 const Notification = () => {
     const {setIsNoti,isNoti,setWrapped} = useContext(HandleContext)
 
-    const {isLoading ,data,error,isError} = useGetNotificationsQuery()
+    const {isLoading ,data,error,isError,refetch} = useGetNotificationsQuery()
     useErrors([{ isError, error }]);
+
+
+    const dispatch = useDispatch()
+    const { socket } = useContext(SocketContext)
+    const newRequestHandler = useCallback(() => {
+        dispatch(incrementNotification())
+        refetch()
+    }, [dispatch])
+
+    const eventHandlers = {
+        [NEW_REQUEST]: newRequestHandler
+    }
+    useSocketEvents(socket, eventHandlers)
   return (
       <>
       <Wrapped/>
@@ -28,13 +45,13 @@ const Notification = () => {
                       <FaXmark />
                   </button>
               </div>
-              <div className='flex flex-col items-center justify-start gap-5 w-full'>
+              {isLoading ? <p>loading...</p> : <div className='flex flex-col items-center justify-start gap-5 w-full'>
                   {data?.allRequests.map((noti) => {
                       return (
                           <NotificationCard key={noti._id} noti={noti} />
                       )
                   })}
-              </div>
+              </div>}
           </div>
       </>
   )
