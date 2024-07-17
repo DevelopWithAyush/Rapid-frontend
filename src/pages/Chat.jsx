@@ -5,7 +5,7 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Loader from "../components/features/Loader";
 import AppLayout from "../components/layout/AppLayout";
@@ -20,6 +20,7 @@ import {
   useGetMessagesFromIdQuery,
   useToGetChatDetailQuery,
 } from "../redux/api/api";
+import { removeNewMessageAlert } from "../redux/reducers/chat";
 
 const Chat = () => {
   const containerRef = useRef(null);
@@ -29,12 +30,14 @@ const Chat = () => {
   const { socket } = useContext(SocketContext);
   const [messages, setMessages] = useState([]);
   const [page, setPage] = useState(1);
+  const [userTyping, setUserTyping] = useState(false);
+  const [IamTyping, setIamTyping] = useState(false);
+  const dispatch = useDispatch()
   
 
   const newMessageHandler = useCallback((data) => {
     if (chatId === data.chatId) {
       setMessages((prev) => [...prev, data.message]);
-      // console.log(data)
       
     } else {
     }
@@ -63,10 +66,9 @@ const Chat = () => {
   const eventHandler = { [NEW_MESSAGE]: newMessageHandler };
   useSocketEvents(socket, eventHandler);
 
-  console.log(oldMessage)
   let allMessages  = [...oldMessage,...messages]
   useEffect(() => {
-
+      dispatch(removeNewMessageAlert(chatId))
     return () => {
       setMessages([]);
       setOldMessage([]);
@@ -78,7 +80,7 @@ const Chat = () => {
     <Loader />
   ) : (
     <AppLayout>
-      <ChatHeader chatId={chatId} />
+      <ChatHeader chatId={chatId} userTyping={userTyping} IamTyping={IamTyping} />
       <div
         ref={containerRef}
         className="h-[86%] w-full flex flex-col items-start justify-start gap-5 p-4 overflow-auto scrollbar  "
@@ -88,7 +90,10 @@ const Chat = () => {
             return <MessageComponents key={i._id} message={i} user={user} />;
           })}
       </div>
-      <MessageSender
+        <MessageSender
+        IamTyping={IamTyping}
+          setIamTyping={setIamTyping}
+          setUserTyping={setUserTyping}
         chatId={chatId}
         members={chatDetails?.data?.chat?.members}
       />

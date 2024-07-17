@@ -48,7 +48,7 @@ const Notification = () => {
               {isLoading ? <p>loading...</p> : <div className='flex flex-col items-center justify-start gap-5 w-full'>
                   {data?.allRequests.map((noti) => {
                       return (
-                          <NotificationCard key={noti._id} noti={noti} />
+                          <NotificationCard key={noti._id} noti={noti} notificationRefetch={refetch} />
                       )
                   })}
               </div>}

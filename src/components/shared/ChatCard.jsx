@@ -42,15 +42,14 @@ const ChatCard = ({
         </div>
         <div className="flex flex-col gap-3">
           <p className="text-white text-[20px] font-normal leading-5">{name}</p>
-          <p className="text-[#B3B3B3]  text-[12px] font-normal leading-3">
-            Ayush Dubey
-          </p>
+        { newMessageAlert?.count>1 &&  <p className="text-[#6dff34]  text-[12px] font-normal leading-3 ">
+            {(newMessageAlert?.count)/2 } new {(newMessageAlert?.count)/2 >1 ?"messages":"message"}
+          </p>}
         </div>
       </div>
-      <div className=" flex flex-col items-end gap-3">
-        <p>{newMessageAlert?.count}</p>
+      {/* <div className=" flex flex-col items-end gap-3">
         <p className="text-[#5A5A5A] text-[16px] font-normal">21:00</p>
-      </div>
+      </div> */}
     </Link>
   );
 };

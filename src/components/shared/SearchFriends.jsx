@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 
 const SearchFriends = ({setUsers}) => {
   const [search, setSearch] = useState("");
-  const [searchUser] = useLazySearchUserQuery();
+  const [searchUser,] = useLazySearchUserQuery();
   useEffect(() => {
     const timeOutId = setTimeout(() => {
       searchUser(search)

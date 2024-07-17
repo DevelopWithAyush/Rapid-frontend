@@ -1,15 +1,20 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useAsyncMutation } from '../../hooks/hooks'
 import { useAcceptFriendRequestMutation } from '../../redux/api/api'
+import { HandleContext } from '../../hooks/HandleState'
 
-const NotificationCard = ({noti}) => {
+const NotificationCard = ({ noti, notificationRefetch }) => {
   const {name,avatar} = noti?.sender 
 
   const [FriendRequest] = useAsyncMutation(useAcceptFriendRequestMutation);
+  const {isnoti ,setIsNoti,setWrapped } =useContext(HandleContext)
 
   // Event handler function
   const acceptFriendRequest = async (requestId, accept) => {
     await FriendRequest("Accepting friend request", { requestId, accept });
+    setIsNoti(false)
+    setWrapped(false)
+    notificationRefetch()
   };
 
 
