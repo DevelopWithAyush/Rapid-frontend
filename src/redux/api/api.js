@@ -68,7 +68,7 @@ const api = createApi({
         url: `chat/message/${chatId}?page=${page}`,
         credentials: "include",
       }),
-      keepUnusedDataFor:0
+      keepUnusedDataFor: 0,
     }),
     sendAttachments: builder.mutation({
       query: (data) => ({
@@ -77,6 +77,15 @@ const api = createApi({
         credentials: "include",
         body: data,
       }),
+    }),
+    createGroup: builder.mutation({
+      query: (data) => ({
+        url: `chat/new`,
+        method: "POST",
+        credentials: "include",
+        body: data,
+      }),
+      invalidatesTags: ["Chat"],
     }),
   }),
 });
@@ -91,5 +100,6 @@ export const {
   useToGetYourFriendsQuery,
   useToGetChatDetailQuery,
   useGetMessagesFromIdQuery,
-  useSendAttachmentsMutation
+  useSendAttachmentsMutation,
+  useCreateGroupMutation,
 } = api;
