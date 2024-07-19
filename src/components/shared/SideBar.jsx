@@ -47,10 +47,10 @@ const dispatch = useDispatch()
           }}
           className=" cursor-pointer text-[28px]"
         />
-        <Link to={"/groups"}>
+        {/* <Link to={"/groups"}>
           {" "}
           <MdGroup className=" cursor-pointer text-[28px]" />
-        </Link>
+        </Link> */}
             <MdOutlineLogout onClick={handleLogout}  className=" cursor-pointer text-[28px]" />
       </aside>
       {/* {isSearch && <Suspense fallback={<div>loading....</div>}><Search /></Suspense>} */}

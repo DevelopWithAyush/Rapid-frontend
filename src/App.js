@@ -31,24 +31,29 @@ const App = () => {
       <HandleState>
         <Suspense fallback={<Loader />}>
           <Toasters />
-          <Routes>
-            <Route element={<SocketProvider>
-              <ProtectRoute user={user} /><ProtectRoute user={user} />
-            </SocketProvider>}>
-              <Route path="/" element={<Home />} />
-              <Route path="/chat/:chatId" element={<Chat  />} />
-              <Route path="/groups" element={<Gorups />} />
-            </Route>
-            <Route
-              path="/login"
-              element={
-                <ProtectRoute user={!user} redirect="/">
-                  <Login />
-                </ProtectRoute>
-              }
-            />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <div className="flex flex-col justify-center w-[100vw] h-[100vh] items-center xl:hidden">
+<p className="text-center text-[24px] font-semibold capitalize text-[#FF4900]" >we working to  launch it for phone and tablet soon... <br />😊</p>
+          </div>
+          <div className="hidden xl:flex ">
+            <Routes>
+              <Route element={<SocketProvider>
+                <ProtectRoute user={user} /><ProtectRoute user={user} />
+              </SocketProvider>}>
+                <Route path="/" element={<Home />} />
+                <Route path="/chat/:chatId" element={<Chat />} />
+                <Route path="/groups" element={<Gorups />} />
+              </Route>
+              <Route
+                path="/login"
+                element={
+                  <ProtectRoute user={!user} redirect="/">
+                    <Login />
+                  </ProtectRoute>
+                }
+              />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </div>
         </Suspense>
       </HandleState>
     </BrowserRouter>
