@@ -4,12 +4,7 @@ import ChatCard from "../shared/ChatCard";
 const ChatList = ({
   data,
   chatId,
-  onlineUsers = [
-    "665e3969628fb659db41a872",
-    "665e3969628fb659db41a878",
-    "665e3969628fb659db41a876",
-    "665e3969628fb659db41a873",
-  ],
+  onlineUsers = [],
   newMessageAlert = [
     {
       chatId: "",
@@ -23,7 +18,7 @@ const ChatList = ({
   return (
     <>
       {!data?.chats[0] ? (
-        <div className="w-full h-full flex flex-col items-center justify-center text-[24px] text-center font-semibold leading-7">
+        <div className="w-full h-full flex flex-col items-center justify-center text-[24px] text-center font-semibold leading-7 ">
           {" "}
           🥺No friends <br /> add friend to chat
         </div>
@@ -54,3 +49,5 @@ const ChatList = ({
 };
 
 export default ChatList;
+
+
