@@ -8,6 +8,7 @@ import Toasters from "./components/shared/Toasters";
 import { server } from "./constants/config";
 import HandleState from "./hooks/HandleState";
 import { SocketProvider } from "./hooks/socket";
+import Landing from "./pages/Landing";
 import { userExists, userNotExists } from "./redux/reducers/auth";
 
 const Home = lazy(() => import("./pages/Home"));
@@ -43,7 +44,7 @@ const App = () => {
                 path="/login"
                 element={
                   <ProtectRoute user={!user} redirect="/">
-                    <Login />
+                    <Landing />
                   </ProtectRoute>
                 }
               />

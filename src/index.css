@@ -8,6 +8,21 @@ body{
 }
 
 
+html::-webkit-scrollbar {
+  width: 0.2rem;
+  scroll-behavior: smooth;
+}
+
+html::-webkit-scrollbar-track {
+  background: rgb(46, 46, 46);
+  border-radius: 1rem;
+}
+
+html::-webkit-scrollbar-thumb {
+  background:orangered;
+  border-radius: 1rem;
+}
+
 .scrollbar::-webkit-scrollbar {
   width: 0.2rem;
   scroll-behavior: smooth;
@@ -25,8 +40,8 @@ body{
 
 body{
   width: 100vw;
-  height: 100vh;
-  overflow: hidden;
+  /* height: 100vh; */
+  overflow-x: hidden;
 }
 
 /* HTML: <div class="loader"></div> */
