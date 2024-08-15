@@ -2,11 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
+body {
   background-color: black;
   color: white;
 }
 
+@font-face {
+  font-family:Montserrat-Bold ;
+  src: local("Montserrat-Bold"), url("./assets/font/Montserrat-Bold.ttf") format("truetype");
+}
 
 html::-webkit-scrollbar {
   width: 0.2rem;
@@ -19,7 +23,7 @@ html::-webkit-scrollbar-track {
 }
 
 html::-webkit-scrollbar-thumb {
-  background:orangered;
+  background: orangered;
   border-radius: 1rem;
 }
 
@@ -34,11 +38,11 @@ html::-webkit-scrollbar-thumb {
 }
 
 .scrollbar::-webkit-scrollbar-thumb {
-  background:orangered;
+  background: orangered;
   border-radius: 1rem;
 }
 
-body{
+body {
   width: 100vw;
   /* height: 100vh; */
   overflow-x: hidden;
@@ -54,16 +58,30 @@ body{
 .loader:after {
   content: "";
   flex: 1;
-  padding-left: calc(100%/6);
-  background: radial-gradient(closest-side at calc(100%/3) 50%,#FF4900 90%,#0000) 0/75% 100% content-box;
+  padding-left: calc(100% / 6);
+  background: radial-gradient(
+      closest-side at calc(100% / 3) 50%,
+      #ff4900 90%,
+      #0000
+    )
+    0/75% 100% content-box;
   animation: l20 2s infinite;
 }
 .loader:after {
-  --_s:-1;
+  --_s: -1;
 }
 @keyframes l20 {
-    0%       {transform:scale(var(--_s,1)) translate(0)    rotate(0)}
-    25%      {transform:scale(var(--_s,1)) translate(-25%) rotate(0)}
-    50%      {transform:scale(var(--_s,1)) translate(-25%) rotate(1turn)}
-    75%,100% {transform:scale(var(--_s,1)) translate(0)    rotate(1turn)}
+  0% {
+    transform: scale(var(--_s, 1)) translate(0) rotate(0);
+  }
+  25% {
+    transform: scale(var(--_s, 1)) translate(-25%) rotate(0);
+  }
+  50% {
+    transform: scale(var(--_s, 1)) translate(-25%) rotate(1turn);
+  }
+  75%,
+  100% {
+    transform: scale(var(--_s, 1)) translate(0) rotate(1turn);
+  }
 }
