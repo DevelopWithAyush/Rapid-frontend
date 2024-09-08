@@ -9,6 +9,9 @@ const HandleState = ({ children }) => {
   const [isNewGroup, setIsNewGroup] = useState(false);
   const [isNoti, setIsNoti] = useState(false);
   const [attachment, setAttachment] = useState(false);
+const [openLogin,setOpenLogin] = useState(false)
+
+console.log(openLogin)
   const handleDeleteChat = (e, _id, groupChat) => {
     e.preventDefault();
   };
@@ -29,6 +32,9 @@ const HandleState = ({ children }) => {
         setIsNoti,
         attachment,
         setAttachment,
+        openLogin,
+        setOpenLogin
+
       }}
     >
       {children}

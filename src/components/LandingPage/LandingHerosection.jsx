@@ -1,14 +1,22 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import male from '../../assets/image/male.png'
 import female from '../../assets/image/Frame 2.png'
 import fire from '../../assets/image/fire.png'
 import heart from '../../assets/image/heart.png'
+import { HandleContext } from '../../hooks/HandleState'
 
 const LandingHerosection = () => {
+
+    const {  setOpenLogin } = useContext(HandleContext);
+
+
   return (
-    <section className='container relative mx-auto max-w-[88rem] h-[100vh] flex  flex-col items-start justify-center gap-[50px] '>
+    <section className='container relative mx-auto max-w-[88rem] h-[100vh] flex  flex-col items-start justify-center gap-[50px] px-[10px] '>
           <h2 className='max-w-[444px] leading-[120%] text-[56px] font-mon_bold text-black '><span className='text-[#FF541E]'>Connect </span> with your circle in fun way !</h2>
-          <button className='inline-flex py-3 px-[22px] justify-center items-center bg-[#FF541E] rounded-[32px] text-white text-2xl capitalize font-semibold' >start Making Friend</button>
+          <button onClick={(e) => {
+              e.preventDefault();
+              setOpenLogin(true)
+          }} className='inline-flex py-3 px-[22px] justify-center items-center bg-[#FF541E] rounded-[32px] text-white text-2xl capitalize font-semibold' >start Making Friend</button>
           <Male></Male>
           <Female content={"Coffe shop at 5?"} top={"20%"} right={"0%"}/>
           <Female content={"Okay "} top={"60%"}  right={"0%"}/>

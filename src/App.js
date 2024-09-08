@@ -13,7 +13,7 @@ import { userExists, userNotExists } from "./redux/reducers/auth";
 
 const Home = lazy(() => import("./pages/Home"));
 const Chat = lazy(() => import("./pages/Chat"));
-const Login = lazy(() => import("./pages/Login"));
+const Login = lazy(() => import("./components/shared/Login"));
 const Gorups = lazy(() => import("./pages/Gorups"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
@@ -32,24 +32,24 @@ const App = () => {
       <HandleState>
         <Suspense fallback={<Loader />}>
           <Toasters />
-            <Routes>
-              <Route element={<SocketProvider>
-                <ProtectRoute user={user} /><ProtectRoute user={user} />
-              </SocketProvider>}>
-                <Route path="/" element={<Home />} />
-                <Route path="/chat/:chatId" element={<Chat />} />
-                <Route path="/groups" element={<Gorups />} />
-              </Route>
-              <Route
-                path="/login"
-                element={
-                  <ProtectRoute user={!user} redirect="/">
-                    <Landing />
-                  </ProtectRoute>
-                }
-              />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
+          <Routes>
+            <Route element={<SocketProvider>
+              <ProtectRoute user={user} /><ProtectRoute user={user} />
+            </SocketProvider>}>
+              <Route path="/" element={<Home />} />
+              <Route path="/chat/:chatId" element={<Chat />} />
+              <Route path="/groups" element={<Gorups />} />
+            </Route>
+            <Route
+              path="/login"
+              element={
+                <ProtectRoute user={!user} redirect="/">
+                  <Landing />
+                </ProtectRoute>
+              }
+            />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
         </Suspense>
       </HandleState>
     </BrowserRouter>

@@ -28,13 +28,13 @@ const Highlight = () => {
               <img  className='self-end' src={LadyWithPhone} alt="" />
           </div>
           <div className=' container mx-auto max-w-[88rem] grid grid-cols-11 gap-[25px] lg:gap-[32px]' >
-              <div className='col-span-11 lg:col-span-4  bg-white p-6 lg:p-12 rounded-[20px] '
+              <div className='col-span-11 lg:col-span-4  bg-white p-6 lg:p-12 rounded-[10px] lg:rounded-[20px] '
                   style={{
                       boxShadow: "4px 4px 12px 0px rgba(0, 0, 0, 0.25)"
                   }}>
                   <p className='text-[32px] leading-[120%] font-bold ' >Rapid guarantees comfort and safety because we understand how important <span className='text-[#FF541E]'>privacy</span> is.</p>
               </div>
-              <div className='col-span-11 lg:col-span-7 bg-white p-6 lg:p-12 flex flex-col items-center justify-center gap-5 rounded-[20px]'
+              <div className='col-span-11 lg:col-span-7 bg-white p-6 lg:p-12 flex flex-col items-center justify-center gap-5 rounded-[10px] lg:rounded-[20px] '
                   style={{
                       boxShadow: "4px 4px 12px 0px rgba(0, 0, 0, 0.25)"
                   }}>
