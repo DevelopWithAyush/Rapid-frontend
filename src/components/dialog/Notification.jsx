@@ -32,8 +32,8 @@ const Notification = () => {
       <>
       <Wrapped/>
           <div
-              className={`absolute bottom-0 left-0 translate-y-[100%] -translate-x-[50%] origin-top transition-all duration-300 ${isNoti ? " scale-100" : "scale-0"
-                  } bg-[#FF4900]  w-[300px] h-[500px] z-[100] rounded-b-xl rounded-t-xl flex flex-col items-center justify-start py-3 px-3 gap-5`}
+              className={`absolute bottom-0 left-0 translate-y-[100%] -translate-x-[70%] origin-custom-origin transition-all duration-300 ${isNoti ? " scale-100" : "scale-0"
+                  } bg-[#FF4900]  w-[325px] h-[500px] z-[100] rounded-b-xl rounded-t-xl flex flex-col items-center justify-start py-3 px-3 gap-5`}
           >
               <div className="flex flex-row items-center justify-between w-full text-[20px]">
                   <p>Notification </p>
