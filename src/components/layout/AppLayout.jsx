@@ -15,6 +15,7 @@ import { getOrSaveFromLocalStorage } from "../features/features";
 
 const AppLayout = ({ children }) => {
   const { chatId } = useParams();
+  console.log(chatId?true:false)
   const { isSearch } = useContext(HandleContext);
   const { isLoading, data, isError, error, refetch } = useMyChatsQuery();
   useErrors([{ isError, error }]);
@@ -56,10 +57,10 @@ const AppLayout = ({ children }) => {
   return (
     <section className="w-[100vw] h-[100vh]    overflow-hidden grid grid-cols-12 gap-[30px]">
       <SideBar />
-      <div className="col-span-11 w-full h-[100vh] ">
+      <div className=" col-span-12 lg:col-span-11 w-full h-[100vh] ">
         <Header />
-        <div className="grid grid-cols-11 gap-[20px] w-full h-[90%] relative">
-          <div className="col-span-3 relative h-full flex flex-col gap-6 items-start justify-start overflow-hidden">
+        <div className="grid grid-cols-11 gap-[20px] w-full h-[90%] relative ">
+          <div className={`${chatId?"lg:col-span-3 col-span-0 hidden lg:flex":"lg:col-span-3 col-span-11 "} px-6 lg:px-3 relative h-full flex flex-col gap-6 items-start justify-start overflow-hidden`} >
             {isSearch ? (
               <Search />
             ) : (
@@ -72,7 +73,7 @@ const AppLayout = ({ children }) => {
               </div>
             )}
           </div>
-          <div className="col-span-8 bg-[#272727] rounded-[12px]  w-full h-full relative overflow-hidden pb-3">
+          <div className={`${chatId?"lg:col-span-8 col-span-11 ":" hidden lg:flex col-span-0 lg:col-span-8 "} col-span-11 lg:col-span-8 bg-[#272727] rounded-[12px]  w-full h-full relative overflow-hidden pb-3`}>
             {children}
           </div>
         </div>

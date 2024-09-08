@@ -29,7 +29,7 @@ const dispatch = useDispatch()
   }
       return (
     <>
-      <aside className="col-span-1 bg-[#FF4900] w-full min-h-screen rounded-tr-[48px] flex flex-col items-center pt-[10vh] gap-16 ">
+      <aside className="col-span-1 bg-[#FF4900] hidden  w-full min-h-screen rounded-tr-[48px] lg:flex flex-col items-center pt-[10vh] gap-16 ">
         <IoChatbubbleEllipses
           onClick={() => setIsSearch(false)}
           className=" cursor-pointer text-[28px]"

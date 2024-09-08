@@ -24,7 +24,7 @@ const Header = () => {
   }, [notificationCount])
   return (
     <>
-      <header className="h-[10%] flex flex-row items-center justify-between pr-12">
+      <header className="h-[10%] flex flex-row items-center justify-between px-6 lg:pr-12">
         <Link to={"/"} className="flex gap-2">
           {" "}
           <Logo />{" "}
@@ -32,7 +32,7 @@ const Header = () => {
             Rapid
           </span>
         </Link>
-        <div className=" flex  h-full items-center justify-center gap-16  ">
+        <div className=" flex  h-full items-center justify-center gap-10 lg:gap-16  ">
           <div className=" relative h-auto w-auto">
             <IoMdNotifications
               className="text-[24px]"
@@ -54,7 +54,7 @@ const Header = () => {
               setProfile(true);
               setWrapped(true);
             }}
-            className="w-12 h-12 rounded-full overflow-hidden flex"
+            className="w-10 lg:w-12 h-10 lg:h-12 rounded-full overflow-hidden flex"
           >
             <img src={user?.avatar?.url} alt={user?.avatar?.public_id} />
           </div>
