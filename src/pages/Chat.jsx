@@ -83,7 +83,7 @@ const Chat = () => {
       <ChatHeader chatId={chatId} userTyping={userTyping} IamTyping={IamTyping} />
       <div
         ref={containerRef}
-        className="h-[86%] w-full flex flex-col items-start justify-start gap-5 p-4 overflow-auto scrollbar  "
+        className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[86%] w-full flex flex-col items-start justify-start gap-5 p-4 overflow-auto scrollbar  "
       >
         {!oldMessageChunk.isLoading &&
           allMessages.map((i) => {

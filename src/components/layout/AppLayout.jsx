@@ -73,7 +73,7 @@ const AppLayout = ({ children }) => {
               </div>
             )}
           </div>
-          <div className={`${chatId?"lg:col-span-8 col-span-11 ":" hidden lg:flex col-span-0 lg:col-span-8 "} col-span-11 lg:col-span-8 bg-[#272727] rounded-[12px]  w-full h-full relative overflow-hidden pb-3`}>
+          <div className={`${chatId?"lg:col-span-8 col-span-11 ":" hidden lg:flex col-span-0 lg:col-span-8 "}  col-span-11 lg:col-span-8 bg-[#272727] rounded-[12px]  w-full h-[100vh] lg:h-full relative overflow-hidden pb-3`}>
             {children}
           </div>
         </div>

@@ -3,7 +3,7 @@ import { IoMdSearch } from "react-icons/io";
 import { IoChatbubbleEllipses } from "react-icons/io5";
 import { MdGroup, MdGroupAdd, MdOutlineLogout } from "react-icons/md";
 
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { HandleContext } from "../../hooks/HandleState";
 import axios from "axios";
 import { server } from "../../constants/config";
@@ -14,6 +14,7 @@ import { userNotExists } from "../../redux/reducers/auth";
 const NewGroup = lazy(() => import("../dialog/NewGroup"));
 
 const SideBar = () => {
+  const { chatId } = useParams();
   const { setIsNewGroup, setIsSearch, isNewGroup, setWrapped } =
     useContext(HandleContext);
 const dispatch = useDispatch()
@@ -29,8 +30,8 @@ const dispatch = useDispatch()
   }
       return (
     <>
-          <aside className="col-span-12 lg:col-span-1 fixed lg:relative bottom-0 left-0  bg-[#FF4900]  w-full  lg:min-h-screen px-6 py-6 lg:px-0 lg:py-0 rounded-t-[12px]
-           lg:rounded-t-[0px] lg:rounded-tr-[48px] flex flex-row lg:flex-col items-center lg:justify-start justify-between  lg:pt-[10vh]  lg:gap-16 ">
+          <aside className={` ${chatId?"lg:flex hidden":"flex lg:flex"} z-[100] col-span-12 lg:col-span-1 fixed lg:relative bottom-0 left-0  bg-[#FF4900]  w-full  lg:min-h-screen px-6 py-6 lg:px-0 lg:py-0 rounded-t-[12px]
+           lg:rounded-t-[0px] lg:rounded-tr-[48px]  flex-row lg:flex-col items-center lg:justify-start justify-between  lg:pt-[10vh]  lg:gap-16 `}>
         <IoChatbubbleEllipses
           onClick={() => setIsSearch(false)}
           className=" cursor-pointer text-[28px]"

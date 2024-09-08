@@ -58,11 +58,11 @@ const MessageSender = ({ chatId, members, setUserTyping, setIamTyping,IamTyping 
   };
 
   return (
-    <div className="h-[6%] flex flex-row items-center justify-between rounded-b-lg w-full px-6 ">
+    <div className="h-[6%] fixed bottom-3 left-0 lg:relative lg:bottom-0 flex flex-row items-center justify-between rounded-b-lg w-full px-3 lg:px-5 ">
       <FileAttachment chatId={chatId} />
       <form
         onSubmit={sendMessageHandler}
-        className=" w-full flex flex-row px-6 h-full justify-between bg-[#424242] rounded-full "
+        className=" w-full flex flex-row px-6 h-full justify-between bg-[#424242] rounded-full  "
       >
         <input
           type="text"

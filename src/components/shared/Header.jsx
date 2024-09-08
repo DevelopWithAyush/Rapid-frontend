@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { IoMdNotifications } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { HandleContext } from "../../hooks/HandleState";
 import Notification from "../dialog/Notification";
 import ProfileCard from "../dialog/ProfileCard";
@@ -11,6 +11,7 @@ import { getOrSaveFromLocalStorage } from "../features/features";
 const Header = () => {
   const { profile, setProfile, setWrapped, isNoti, setIsNoti } =
     useContext(HandleContext);
+  const { chatId } = useParams();
 
   const { user } = useSelector((state) => state.auth);
   const { notificationCount } = useSelector((state) => state.chat);
@@ -24,7 +25,7 @@ const Header = () => {
   }, [notificationCount])
   return (
     <>
-      <header className="h-[7%] flex flex-row items-center justify-between px-6 lg:pr-12">
+      <header className={`h-[7%] ${chatId?"lg:flex hidden":"flex lg:flex"}  flex-row items-center justify-between px-6 lg:pr-12`} >
         <Link to={"/"} className="flex gap-2">
           {" "}
           <Logo />{" "}
