@@ -25,13 +25,13 @@ const Search = () => {
                 <div className="flex w-[48px] aspect-square rounded-full overflow-hidden">
                   <img src={user?.avatar} alt={user._id} />
                 </div>
-                <p>{user.name}</p>
+                <p className="w-36 overflow-hidden whitespace-nowrap text-ellipsis">{user.name}</p>
               </div>
               <button
                 onClick={() => friendRequestHandler(user._id,user.name)}
                 className="px-3 py-1 capitalize rounded-full bg-green-500 "
               >
-                + friend request
+                + request
               </button>
             </div>
           );

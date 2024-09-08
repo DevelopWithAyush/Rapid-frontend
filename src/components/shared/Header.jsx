@@ -44,7 +44,7 @@ const Header = () => {
             />
             {notificationCount !== 0 && (
               <div className="absolute top-0 right-0 translate-x-1/2 -translate-y-1/2 w-6 rounded-full text-[12px] p-[2px] aspect-square flex flex-col items-center justify-center  bg-red-500  ">
-                {notificationCount/2 >99 ? "99+ ":notificationCount/2}
+                {notificationCount >99 ? "99+ ":notificationCount}
               </div>
             )}
             <Notification />

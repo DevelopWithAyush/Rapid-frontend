@@ -28,7 +28,7 @@ const NotificationCard = ({ noti, notificationRefetch }) => {
         <div className='w-[50px] h-[50px] rounded-full overflow-hidden bg-white'>
               <img src={avatar} alt={avatar} />
         </div>
-        <p className='text-[16px] font-medium'>{name}</p>
+        <p className='text-[16px] font-medium w-24 overflow-hidden whitespace-nowrap text-ellipsis'>{name}</p>
       </div>
       <div className='flex flex-row items-center justify-start gap-5 '>
         <button onClick={()=> acceptFriendRequest(noti?._id,true)}  className=' flex flex-col items-center justify-center rounded-full text-[16px] text-green-500 capitalize'>accept</button>

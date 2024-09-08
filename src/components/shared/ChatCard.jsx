@@ -41,7 +41,7 @@ const ChatCard = ({
           )}
         </div>
         <div className="flex flex-col gap-3">
-          <p className="text-white text-[20px] font-normal leading-5">{name}</p>
+          <p className="text-white text-[20px] font-normal leading-5 w-[13vw] overflow-hidden whitespace-nowrap text-ellipsis">{name}</p>
         { newMessageAlert?.count>1 &&  <p className="text-[#6dff34]  text-[12px] font-normal leading-3 ">
             {(newMessageAlert?.count)/2 } new {(newMessageAlert?.count)/2 >1 ?"messages":"message"}
           </p>}
