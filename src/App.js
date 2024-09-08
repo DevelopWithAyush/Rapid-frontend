@@ -33,9 +33,14 @@ const App = () => {
         <Suspense fallback={<Loader />}>
           <Toasters />
           <Routes>
-            <Route element={<SocketProvider>
-              <ProtectRoute user={user} /><ProtectRoute user={user} />
-            </SocketProvider>}>
+            <Route
+              element={
+                <SocketProvider>
+                  {" "}
+                  <ProtectRoute user={user} />{" "}
+                </SocketProvider>
+              }
+            >
               <Route path="/" element={<Home />} />
               <Route path="/chat/:chatId" element={<Chat />} />
               <Route path="/groups" element={<Gorups />} />

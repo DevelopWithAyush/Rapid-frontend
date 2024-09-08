@@ -17,6 +17,7 @@ const Login = () => {
 
   const loginSubmit = async (e) => {
     e.preventDefault();
+    const toastId = toast.loading("loging...");
     const config = {
       withCredentials: true,
       headers: {
@@ -33,9 +34,11 @@ const Login = () => {
         config
       );
       dispatch(userExists(true));
-      toast.success(data.message);
+      toast.success(data.message, { id: toastId });
     } catch (error) {
-      toast.error(error?.response?.data?.message || "Something wend wrong");
+      toast.error(error?.response?.data?.message || "Something wend wrong", {
+        id: toastId,
+      });
     }
   };
 
@@ -72,11 +75,11 @@ const Login = () => {
 
   return (
     <>
-      <div onClick={(e) => {
-      e.preventDefault()
-      setOpenLogin(false)
-      }
-      }
+      <div
+        onClick={(e) => {
+          e.preventDefault();
+          setOpenLogin(false);
+        }}
         className={`z-[49] ${
           openLogin ? "scale-100" : "scale-0"
         } fixed top-0 left-0 w-[100vw] h-[100vh]   bg-black bg-opacity-50 blur-[20px] duration-300 transition ease-in `}
@@ -89,7 +92,7 @@ const Login = () => {
       >
         {login ? (
           <>
-            <p className="text-[24px] font-semibold">Login</p>
+            <p className="text-[24px] font-semibold text-white">Login</p>
             <form className=" flex flex-col items-center gap-6 w-full">
               <input
                 value={email}
@@ -113,7 +116,7 @@ const Login = () => {
                 Submit
               </button>
             </form>
-            <p>
+            <p className="text-white">
               Not have accout?{" "}
               <button
                 className="font-medium"
@@ -127,7 +130,7 @@ const Login = () => {
           </>
         ) : (
           <>
-            <p className="text-[24px] font-semibold">SignUp</p>
+            <p className="text-[24px] font-semibold text-white">SignUp</p>
             <form className=" flex flex-col items-center gap-6 w-full">
               <input
                 type="file"
@@ -165,7 +168,7 @@ const Login = () => {
                 Submit
               </button>
             </form>
-            <p>
+            <p className="text-white">
               Already have accout?{" "}
               <button
                 className="font-medium"
