@@ -24,7 +24,7 @@ const Header = () => {
   }, [notificationCount])
   return (
     <>
-      <header className="h-[10%] flex flex-row items-center justify-between px-6 lg:pr-12">
+      <header className="h-[7%] flex flex-row items-center justify-between px-6 lg:pr-12">
         <Link to={"/"} className="flex gap-2">
           {" "}
           <Logo />{" "}

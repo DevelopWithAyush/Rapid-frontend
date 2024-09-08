@@ -56,10 +56,10 @@ const AppLayout = ({ children }) => {
 
   return (
     <section className="w-[100vw] h-[100vh]    overflow-hidden grid grid-cols-12 gap-[30px]">
-      <SideBar />
+      <SideBar  />
       <div className=" col-span-12 lg:col-span-11 w-full h-[100vh] ">
         <Header />
-        <div className="grid grid-cols-11 gap-[20px] w-full h-[90%] relative ">
+        <div className="grid grid-cols-11 gap-[20px] w-full h-[86%] lg:h-[93%] relative">
           <div className={`${chatId?"lg:col-span-3 col-span-0 hidden lg:flex":"lg:col-span-3 col-span-11 "} px-6 lg:px-3 relative h-full flex flex-col gap-6 items-start justify-start overflow-hidden`} >
             {isSearch ? (
               <Search />
@@ -77,6 +77,7 @@ const AppLayout = ({ children }) => {
             {children}
           </div>
         </div>
+        <div></div>
       </div>
     </section>
   );

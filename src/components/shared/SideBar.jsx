@@ -29,12 +29,13 @@ const dispatch = useDispatch()
   }
       return (
     <>
-      <aside className="col-span-1 bg-[#FF4900] hidden  w-full min-h-screen rounded-tr-[48px] lg:flex flex-col items-center pt-[10vh] gap-16 ">
+          <aside className="col-span-12 lg:col-span-1 fixed lg:relative bottom-0 left-0  bg-[#FF4900]  w-full  lg:min-h-screen px-6 py-6 lg:px-0 lg:py-0 rounded-t-[12px]
+           lg:rounded-t-[0px] lg:rounded-tr-[48px] flex flex-row lg:flex-col items-center lg:justify-start justify-between  lg:pt-[10vh]  lg:gap-16 ">
         <IoChatbubbleEllipses
           onClick={() => setIsSearch(false)}
           className=" cursor-pointer text-[28px]"
         />
-        <Link to={"/"}>
+        <Link to={"/"} >
           <IoMdSearch
             onClick={() => setIsSearch(true)}
             className=" cursor-pointer text-[28px]"

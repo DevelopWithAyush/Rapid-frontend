@@ -10,7 +10,7 @@ const MessageComponents = ({ message, user }) => {
   return (
     <div
       className={`flex items-end gap-3 justify-start ${sameSender ? "self-end flex-row-reverse" : "self-start flex-row"
-        } max-w-[50%]`}
+        } max-w-[70%]`}
     >
       <div className="w-[7%] aspect-square rounded-full overflow-hidden bg-gray-500">
         <img
