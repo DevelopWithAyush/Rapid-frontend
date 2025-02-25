@@ -73,7 +73,7 @@ const MessageSender = ({ chatId, members, setUserTyping, setIamTyping,IamTyping 
         />
         <button type="submit" className="h-full   ">
           {" "}
-          <FaArrowRight className="text-[30px] text-[#FF4900] hover:translate-x-[5px] duration-100 " />
+          <FaArrowRight className="text-[30px] text-[#6eab5e] hover:translate-x-[5px] duration-100 " />
         </button>
       </form>
     </div>

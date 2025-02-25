@@ -46,7 +46,7 @@ const FileAttachment = ({chatId}) => {
       <div className=" h-full relative  m-3 flex flex-col items-center justify-center rounded-full">
         <MdAttachFile
           onClick={() => [setAttachment(!attachment)]}
-          className="  text-[30px] rotate-[35deg]"
+          className="  text-[30px] rotate-[35deg] text-[#6eab5e] "
         />
         <div
           className={`absolute top-0 left-1/2 -translate-x-1/2 -translate-y-[100%] bg-[#FF4900] transition-all duration-300 origin-bottom ${attachment ? "scale-100" : "scale-0"

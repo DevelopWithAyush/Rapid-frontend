@@ -21,7 +21,7 @@ const MessageComponents = ({ message, user }) => {
       </div>
       <div className="rounded-[12px] max-w-[93%]">
         {content && (
-          <div className={`flex flex-col items-start justify-start rounded-[12px] pt-3 pb-1 px-3 ${sameSender ? "bg-[#FF4900]" : "bg-black"
+          <div className={`flex flex-col items-start justify-start rounded-[12px] pt-3 pb-1 px-3 ${sameSender ? "bg-[#C6afff]" : "bg-black"
             }`}>
             <p
              

@@ -30,7 +30,7 @@ const dispatch = useDispatch()
   }
       return (
     <>
-          <aside className={` ${chatId?"lg:flex hidden":"flex lg:flex"} z-[100] col-span-12 lg:col-span-1 fixed lg:relative bottom-0 left-0  bg-[#FF4900]  w-full  lg:min-h-screen px-6 py-6 lg:px-0 lg:py-0 rounded-t-[12px]
+          <aside className={` ${chatId ? "lg:flex hidden" : "flex lg:flex"} z-[100] col-span-12 lg:col-span-1 fixed lg:relative bottom-0 left-0 bg-gradient-to-r from-[#FF889c] to-[#6eab5e]  w-full  lg:min-h-screen px-6 py-6 lg:px-0 lg:py-0 rounded-t-[12px]
            lg:rounded-t-[0px] lg:rounded-tr-[48px]  flex-row lg:flex-col items-center lg:justify-start justify-between  lg:pt-[10vh]  lg:gap-16 `}>
         <IoChatbubbleEllipses
           onClick={() => setIsSearch(false)}
